@@ -1,4 +1,5 @@
 import 'package:chatroom/api.dart';
+import 'package:chatroom/components/MyDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:chatroom/components/MyButton.dart';
 import 'package:chatroom/components/TextField.dart';
@@ -35,6 +36,8 @@ class _LoginPageState extends State<LoginPage> {
 
       if (result) {
         Navigator.pushNamed(context, '/chatlist');
+      } else {
+        Dialogs.showAlert(context, "email or password is wrong");
       }
     } catch (e) {
       debugPrint("error : $e");

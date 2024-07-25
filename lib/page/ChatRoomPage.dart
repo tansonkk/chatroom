@@ -37,10 +37,17 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     getMessage();
     getUserInfo();
     _messageController.text = '';
+    realtime();
+  }
+
+  void realtime() {
     _channel.stream.listen((message) {
-      setState(() {
-        messageList.add(jsonDecode(message));
-      });
+      final data = jsonDecode(message);
+      if (data['sender_id'] == userId || data['receiver_id'] == userId) {
+        setState(() {
+          messageList.add(data);
+        });
+      }
     });
   }
 
